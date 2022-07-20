@@ -6,7 +6,7 @@ class WordFrequency {
 
   @override
   String toString() {
-    return "$word - $frequency";
+    return "{'$word', $frequency}";
   }
 
   @override
@@ -37,11 +37,11 @@ abstract class WordFrequencyAnalyzer {
   List<WordFrequency> calculateMostFrequentNWords(String text, int n);
 }
 
-class WordFrequencyAnalyzeImpl implements WordFrequencyAnalyzer {
+class WordFrequencyAnalyzerImpl implements WordFrequencyAnalyzer {
   @override
   int calculateFrequencyForWord(String text, String word) => text
       .split(' ')
-      .where((w) => w.toLowerCase() == word.toLowerCase())
+      .where((w) => w.toLowerCase() == word.toLowerCase() && word != '')
       .length;
 
   @override
@@ -62,7 +62,7 @@ class WordFrequencyAnalyzeImpl implements WordFrequencyAnalyzer {
     final dict = <String, int>{};
 
     text.split(' ').forEach((word) {
-      if (!dict.containsValue(word.toLowerCase())) {
+      if (!dict.containsValue(word.toLowerCase()) && word != '') {
         dict[word.toLowerCase()] = calculateFrequencyForWord(text, word);
       }
     });
@@ -78,6 +78,8 @@ class WordFrequencyAnalyzeImpl implements WordFrequencyAnalyzer {
 
       return b.frequency - a.frequency;
     });
+
+    if (n >= list.length) return list;
 
     return list.sublist(0, n);
   }

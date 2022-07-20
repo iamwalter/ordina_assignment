@@ -6,7 +6,7 @@ void main() {
   const text =
       "good hello hello good hellohello how are you hello good bye ?? !! )2 &#* good good bye (@&#(! hello bye";
 
-  final wordAnalyzer = WordFrequencyAnalyzeImpl();
+  final wordAnalyzer = WordFrequencyAnalyzerImpl();
 
   test('calculateFrequencyForWord', () {
     int expected = 4;
