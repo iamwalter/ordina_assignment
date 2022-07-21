@@ -166,11 +166,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Increment',
-        onPressed: () => print("pressed"),
-        child: const Icon(Icons.refresh),
-      ),
     );
   }
 }

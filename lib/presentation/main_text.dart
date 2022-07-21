@@ -16,7 +16,7 @@ class MainText extends StatelessWidget {
             controller: ScrollController(),
             child: Column(
               children: [
-                Text("Enter Some Text", style: const TextStyle(fontSize: 38.0)),
+                Text("Text Analyzer", style: const TextStyle(fontSize: 38.0)),
                 SizedBox(height: 18.0),
                 TextField(
                   onChanged: (str) => store.onTextChange(str),

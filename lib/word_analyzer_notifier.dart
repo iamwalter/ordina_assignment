@@ -4,9 +4,7 @@ import 'package:ordina_assignment/word_processing.dart';
 class WordAnalyzerNotifier extends ChangeNotifier {
   WordFrequencyAnalyzer wordFrequencyAnalyzer;
 
-  WordAnalyzerNotifier(this.wordFrequencyAnalyzer) {
-    _handle();
-  }
+  WordAnalyzerNotifier(this.wordFrequencyAnalyzer);
 
   String word = "";
   String text = "";
@@ -16,7 +14,9 @@ class WordAnalyzerNotifier extends ChangeNotifier {
   int highestFrequency = 0;
   List<WordFrequency> wordFrequencies = [];
 
-  void _handle() {
+  void onTextChange(String text) {
+    this.text = text;
+
     frequencyForWord =
         wordFrequencyAnalyzer.calculateFrequencyForWord(text, word);
     wordFrequencies =
@@ -26,21 +26,21 @@ class WordAnalyzerNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onTextChange(String text) {
-    this.text = text;
-
-    _handle();
-  }
-
   void onWordChange(String word) {
     this.word = word;
 
-    _handle();
+    frequencyForWord =
+        wordFrequencyAnalyzer.calculateFrequencyForWord(text, word);
+
+    notifyListeners();
   }
 
   void onNWordsChange(double nWords) {
     this.nWords = nWords.round();
 
-    _handle();
+    wordFrequencies =
+        wordFrequencyAnalyzer.calculateMostFrequentNWords(text, this.nWords);
+
+    notifyListeners();
   }
 }
