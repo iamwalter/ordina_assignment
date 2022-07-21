@@ -41,51 +41,75 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Row(
         children: [
-          Expanded(flex: 4, child: MainText()),
+          const Expanded(flex: 2, child: MainText()),
           Expanded(
-            flex: 2,
             child: Consumer<WordAnalyzerNotifier>(
               builder: (context, store, builder) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    InformationBox(
-                      title: "calculateFrequencyForWord",
-                      child: Column(
-                        children: [
-                          Text("Word: ${store.word}"),
-                          TextField(
-                            onChanged: (str) => store.onWordChange(str),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        InformationBox(
+                          title: "Word Frequency",
+                          child: Column(
+                            children: [
+                              TextField(
+                                onChanged: (str) => store.onWordChange(str),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.deny(
+                                      RegExp(r'\s')),
+                                ],
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'Enter a word',
+                                ),
+                              ),
+                              const SizedBox(height: 16.0),
+                              const Text("Frequency:"),
+                              Text(
+                                "${store.frequencyForWord}",
+                                style: const TextStyle(fontSize: 32.0),
+                              )
                             ],
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'Enter a word',
+                          ),
+                        ),
+                        InformationBox(
+                          title: "Most Frequent Words",
+                          child: SingleChildScrollView(
+                            physics: ScrollPhysics(),
+                            child: Column(
+                              children: [
+                                Text("N: ${store.nWords}"),
+                                Slider(
+                                  value: store.nWords.toDouble(),
+                                  divisions: 15,
+                                  label:
+                                      "N: ${store.nWords.round().toString()}",
+                                  min: 1,
+                                  max: 50,
+                                  onChanged: (value) =>
+                                      store.onNWordsChange(value),
+                                ),
+                                ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: store.wordFrequencies.length,
+                                  itemBuilder: (context, i) {
+                                    final items = store.wordFrequencies;
+
+                                    return Text(items[i].toString());
+                                  },
+                                ),
+                              ],
                             ),
                           ),
-                          Text("Frequency in text: ${store.frequencyForWord}")
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    InformationBox(
-                      title: "calculateMostFrequentNWords",
-                      child: Column(
-                        children: [
-                          Text("N: ${store.nWords}"),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: store.wordFrequencies.length,
-                            itemBuilder: (context, i) {
-                              final items = store.wordFrequencies;
-
-                              return Text(items[i].toString());
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 );
               },
             ),

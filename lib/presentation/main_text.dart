@@ -26,13 +26,6 @@ class MainText extends StatelessWidget {
                 maxLines: null,
               ),
               const SizedBox(height: 32.0),
-              Slider(
-                  value: store.nWords.toDouble(),
-                  divisions: 15,
-                  label: "N: ${store.nWords.round().toString()}",
-                  min: 1,
-                  max: 15,
-                  onChanged: (value) => store.onNWordsChange(value))
             ],
           ),
         );

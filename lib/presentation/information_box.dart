@@ -13,8 +13,13 @@ class InformationBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: 200.0),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        border: Border.all(color: Colors.grey),
+      ),
       child: Column(
         children: [
           Text(
@@ -24,7 +29,9 @@ class InformationBox extends StatelessWidget {
               fontSize: 24.0,
             ),
           ),
-          const Divider(),
+          const Divider(
+            color: Colors.black,
+          ),
           child,
         ],
       ),
