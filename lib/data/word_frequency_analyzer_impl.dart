@@ -26,6 +26,8 @@ class WordFrequencyAnalyzerImpl implements WordFrequencyAnalyzer {
     final dict = <String, int>{};
 
     text.split(' ').forEach((word) {
+      if (word == '') return;
+
       if (dict[word.toLowerCase()] == null) {
         dict[word.toLowerCase()] = 1;
       } else {
