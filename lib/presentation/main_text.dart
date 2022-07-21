@@ -12,21 +12,26 @@ class MainText extends StatelessWidget {
       builder: (context, store, child) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 64.0, vertical: 16.0),
-          child: Column(
-            children: [
-              TextField(
-                onChanged: (str) => store.onTextChange(str),
-                keyboardType: TextInputType.multiline,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
-                  hintText: "Enter Text",
+          child: SingleChildScrollView(
+            controller: ScrollController(),
+            child: Column(
+              children: [
+                Text("Enter Some Text", style: const TextStyle(fontSize: 38.0)),
+                SizedBox(height: 18.0),
+                TextField(
+                  onChanged: (str) => store.onTextChange(str),
+                  keyboardType: TextInputType.multiline,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
+                    hintText: "Enter Text",
+                  ),
+                  maxLines: null,
                 ),
-                maxLines: null,
-              ),
-              const SizedBox(height: 32.0),
-            ],
+                const SizedBox(height: 32.0),
+              ],
+            ),
           ),
         );
       },

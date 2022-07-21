@@ -50,8 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     horizontal: 8.0,
                   ),
                   child: SingleChildScrollView(
+                    controller: ScrollController(),
                     child: Column(
                       children: [
+                        InformationBox(
+                          title: "Highest Frequency",
+                          child: Text(
+                            "${store.highestFrequency}",
+                            style: const TextStyle(fontSize: 32.0),
+                          ),
+                        ),
                         InformationBox(
                           title: "Word Frequency",
                           child: Column(
@@ -79,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         InformationBox(
                           title: "Most Frequent Words",
                           child: SingleChildScrollView(
-                            physics: ScrollPhysics(),
+                            physics: const ScrollPhysics(),
                             child: Column(
                               children: [
                                 Text("N: ${store.nWords}"),
@@ -93,14 +101,56 @@ class _MyHomePageState extends State<MyHomePage> {
                                   onChanged: (value) =>
                                       store.onNWordsChange(value),
                                 ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        child: const Text(
+                                          "WORD",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        child: const Text(
+                                          "FREQUENCY",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4.0),
                                 ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: store.wordFrequencies.length,
                                   itemBuilder: (context, i) {
-                                    final items = store.wordFrequencies;
+                                    final item = store.wordFrequencies[i];
 
-                                    return Text(items[i].toString());
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 2.0),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              child: Container(
+                                                  alignment: Alignment.center,
+                                                  child: Text(item.word))),
+                                          Expanded(
+                                              child: Container(
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                      "${item.frequency}"))),
+                                        ],
+                                      ),
+                                    );
                                   },
                                 ),
                               ],
