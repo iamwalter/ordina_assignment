@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class InformationBox extends StatelessWidget {
@@ -29,9 +28,7 @@ class InformationBox extends StatelessWidget {
               fontSize: 24.0,
             ),
           ),
-          const Divider(
-            color: Colors.black,
-          ),
+          const Divider(color: Colors.black),
           child,
         ],
       ),

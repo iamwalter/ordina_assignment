@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ordina_assignment/word_processing.dart';
+import 'package:ordina_assignment/data/word_frequency_analyzer_impl.dart';
+import 'package:ordina_assignment/data/entities/word_frequency.dart';
 
 void main() {
   const text =

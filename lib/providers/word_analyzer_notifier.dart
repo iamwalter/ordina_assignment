@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ordina_assignment/word_processing.dart';
+import 'package:ordina_assignment/data/entities/word_frequency.dart';
+import 'package:ordina_assignment/data/word_frequency_analyzer.dart';
 
 class WordAnalyzerNotifier extends ChangeNotifier {
   WordFrequencyAnalyzer wordFrequencyAnalyzer;
@@ -12,6 +13,7 @@ class WordAnalyzerNotifier extends ChangeNotifier {
   int nWords = 10;
   int frequencyForWord = 0;
   int highestFrequency = 0;
+
   List<WordFrequency> wordFrequencies = [];
 
   void onTextChange(String text) {

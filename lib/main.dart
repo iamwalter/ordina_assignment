@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ordina_assignment/presentation/home_page.dart';
-import 'package:ordina_assignment/word_analyzer_notifier.dart';
-import 'package:ordina_assignment/word_processing.dart';
-import 'package:provider/provider.dart';
+import 'package:ordina_assignment/screens/home_page.dart';
 
 void main() {
   runApp(const MyApp());
